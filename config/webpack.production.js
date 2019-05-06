@@ -3,6 +3,7 @@ const stylelintWebpackPlugin=require('stylelint-webpack-plugin');
 const HtmlWebpackPlugin=require('html-webpack-plugin');
 const VueLoaderPlugin=require('vue-loader/lib/plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const config=require('./index');
 module.exports={
     output:{
@@ -17,6 +18,10 @@ module.exports={
             files: ['**/*.css', '**/*.less', '**/*.html', '**/*.htm', '**/*.vue', '**/*.scss']
         })]:[],
         new VueLoaderPlugin(),
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        new MiniCssExtractPlugin({
+            filename: "app.[hash].css",
+            chunkFilename: "app.[hash].css"
+        })
     ]
 }

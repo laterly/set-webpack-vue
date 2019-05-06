@@ -1,6 +1,6 @@
 const path = require("path");
 const config = require("./config/index");
-
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = (env, argv) => {
   env = env || {};
   let build = null; //启用配置
@@ -43,9 +43,13 @@ module.exports = (env, argv) => {
         {
           test: /\.css$/i,
           use: [
-            {
-              loader: "style-loader"
-            },
+            env.production
+              ? {
+                  loader: MiniCssExtractPlugin.loader
+                }
+              : {
+                  loader: "style-loader"
+                },
             {
               loader: "css-loader"
             },
@@ -61,9 +65,13 @@ module.exports = (env, argv) => {
         {
           test: /\.stylus$/i,
           use: [
-            {
-              loader: "style-loader"
-            },
+            env.production
+              ? {
+                  loader: MiniCssExtractPlugin.loader
+                }
+              : {
+                  loader: "style-loader"
+                },
             {
               loader: "css-loader"
             },
@@ -119,7 +127,7 @@ module.exports = (env, argv) => {
               loader: "url-loader",
               options: {
                 limit: 4 * 1024,
-                outputPath: "images/"
+                name: "images/[name].[hash:7].[ext]"
               }
             }
           ]
@@ -127,13 +135,28 @@ module.exports = (env, argv) => {
         //fonts
         {
           test: /\.(eot|svg|ttf|woff|woff2)$/i,
-          use: {
-            loader: "url-loader",
-            options: {
-              outputPath: "fonts/",
-              limit: 4 * 1024
+          use: [
+            {
+              loader: "url-loader",
+              options: {
+                limit: 4 * 1024,
+                name: "fonts/[name].[hash:7].[ext]"
+              }
             }
-          }
+          ]
+        },
+        //media
+        {
+          test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+          use: [
+            {
+              loader: "url-loader",
+              options: {
+                limit: 4 * 1024,
+                name: "media/[name].[hash:7].[ext]"
+              }
+            }
+          ]
         }
       ]
     },
