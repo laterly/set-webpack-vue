@@ -1,25 +1,72 @@
 <template>
-  <div class="index">
-    <a-button type="primary">Primary</a-button>
-    <a-button>Default</a-button>
-    <a-button type="dashed">Dashed</a-button>
-    <a-button type="danger">Danger</a-button>
+  <div style="min-height:100vh">
+  <a-layout id="components-layout-demo-custom-trigger" style="min-height:100vh">
+    <a-layout-sider
+      :trigger="null"
+      collapsible
+      v-model="collapsed"
+    >
+      <div class="logo">webpack-vue</div>
+      <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['1']">
+        <a-menu-item key="1">
+          <a-icon type="user" />
+          <span>nav 1</span>
+        </a-menu-item>
+        <a-menu-item key="2">
+          <a-icon type="video-camera" />
+          <span>nav 2</span>
+        </a-menu-item>
+        <a-menu-item key="3">
+          <a-icon type="upload" />
+          <span>nav 3</span>
+        </a-menu-item>
+      </a-menu>
+    </a-layout-sider>
+    <a-layout>
+      <a-layout-header style="background: #fff; padding: 0">
+        <a-icon
+          class="trigger"
+          :type="collapsed ? 'menu-unfold' : 'menu-fold'"
+          @click="()=> collapsed = !collapsed"
+        />
+      </a-layout-header>
+      <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }">
+        Content
+      </a-layout-content>
+    </a-layout>
+  </a-layout>
   </div>
 </template>
-
 <script>
 export default {
-  data() {
+  data(){
     return {
-      msg: "hello vue"
-    };
+      collapsed: false
+    }
   },
-  methods: {}
-};
+}
 </script>
-
 <style lang="stylus" scoped>
-.index {
-  color: red;
+#components-layout-demo-custom-trigger .trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color .3s;
+}
+
+#components-layout-demo-custom-trigger .trigger:hover {
+  color: #1890ff;
+}
+
+#components-layout-demo-custom-trigger .logo {
+  height: 32px;
+  background: rgba(255,255,255,.2);
+  margin: 16px;
+}
+.logo{
+  text-align:center;
+  line-height:32px;
+  color:#fff;
 }
 </style>
