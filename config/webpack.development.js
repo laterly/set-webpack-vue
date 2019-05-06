@@ -3,7 +3,8 @@ const stylelintWebpackPlugin=require('stylelint-webpack-plugin');
 const HtmlWebpackPlugin=require('html-webpack-plugin');
 const VueLoaderPlugin=require('vue-loader/lib/plugin');
 const config=require('./index');
-module.exports={
+module.exports = {
+    mode:'development',
     output:{
         filename:'app.js'
     },
