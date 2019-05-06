@@ -21,9 +21,12 @@
   "homepage": "https://github.com/laterly/set-webpack-vue#readme",
   "devDependencies": {
     "@babel/core": "^7.4.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.4.4",
     "autoprefixer": "^9.5.1",
     "babel-loader": "^8.0.5",
+    "babel-plugin-import": "^1.11.0",
+    "clean-webpack-plugin": "^2.0.1",
     "css-loader": "^2.1.1",
     "eslint": "^5.16.0",
     "eslint-loader": "^2.1.2",
@@ -34,6 +37,8 @@
     "stylelint": "^10.0.1",
     "stylelint-config-standard": "^18.3.0",
     "stylelint-webpack-plugin": "^0.10.5",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
     "url-loader": "^1.1.2",
     "vue": "^2.6.10",
     "vue-loader": "^15.7.0",
@@ -50,5 +55,8 @@
   ],
   "stylelint": {
     "extends": "stylelint-config-standard"
+  },
+  "dependencies": {
+    "ant-design-vue": "^1.3.8"
   }
 }

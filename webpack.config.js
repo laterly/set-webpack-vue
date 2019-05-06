@@ -25,7 +25,8 @@ module.exports = (env, argv) => {
       alias: {
         vue: "vue/dist/vue.esm",
         "@": path.resolve(__dirname, "./src")
-      }
+      },
+      extensions: [".js", ".json", ".vue", ".stylus", ".css"]
     },
     module: {
       rules: [
@@ -56,6 +57,27 @@ module.exports = (env, argv) => {
             }
           ]
         },
+        //stylus
+        {
+          test: /\.stylus$/i,
+          use: [
+            {
+              loader: "style-loader"
+            },
+            {
+              loader: "css-loader"
+            },
+            {
+              loader: "postcss-loader",
+              options: {
+                plugins: [require("autoprefixer")]
+              }
+            },
+            {
+              loader: "stylus-loader"
+            }
+          ]
+        },
         //js
         {
           test: /\.js$/i,
@@ -63,7 +85,18 @@ module.exports = (env, argv) => {
             {
               loader: "babel-loader",
               options: {
-                presets: ["@babel/preset-env"]
+                presets: ["@babel/preset-env"],
+                plugins: [
+                  "@babel/plugin-syntax-dynamic-import",
+                  [
+                    "import",
+                    {
+                      libraryName: "ant-design-vue",
+                      libraryDirectory: "es",
+                      style: "css"
+                    }
+                  ]
+                ]
               }
             },
             ...(ESLINT
